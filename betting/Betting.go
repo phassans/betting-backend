@@ -48,7 +48,7 @@ type BettingBetInfo struct {
 
 // BettingMetaData contains all meta data concerning the Betting contract.
 var BettingMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_usdc\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_priceFeed\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_botAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_botFeeBasisPoints\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"userB\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"openingPrice\",\"type\":\"uint256\"}],\"name\":\"BetActived\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"closingPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"winnerReward\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"feeAmount\",\"type\":\"uint256\"}],\"name\":\"BetClosed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"betId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BetRefunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isLong\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"createTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"closingTime\",\"type\":\"uint256\"}],\"name\":\"NewBetCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"RewardWithdrawal\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_isAllowed\",\"type\":\"bool\"}],\"name\":\"allowUser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"betCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"isLong\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"_usdcAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_expireTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_closingTime\",\"type\":\"uint256\"}],\"name\":\"createBet\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getActiveBetIDs\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBTCPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"getBetIdsForUser\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"}],\"name\":\"getBetInfo\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"userB\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"reward\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isLong\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"createTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"closingTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"openingPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"closingPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"betStatus\",\"type\":\"uint256\"}],\"internalType\":\"structBetting.BetInfo\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBotAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBotFeeBasisPoints\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPendingBetIDs\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPriceFeedAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getUSDCAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_usdcAmount\",\"type\":\"uint256\"}],\"name\":\"joinBet\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"betId\",\"type\":\"uint256\"}],\"name\":\"refundBet\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"}],\"name\":\"resolveBet\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_botAddress\",\"type\":\"address\"}],\"name\":\"setBotAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_botFeeBasisPoints\",\"type\":\"uint256\"}],\"name\":\"setBotFeeBasisPoints\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_feedAddress\",\"type\":\"address\"}],\"name\":\"setPriceFeedAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_usdcAddress\",\"type\":\"address\"}],\"name\":\"setUSDCAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_usdc\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_priceFeed\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_botAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_botFeeBasisPoints\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"providedAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"requiredAmount\",\"type\":\"uint256\"}],\"name\":\"AmountMismatchError\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"providedBetID\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"betStatus\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"}],\"name\":\"BetClosedError\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requiredBalance\",\"type\":\"uint256\"}],\"name\":\"InsufficientBalance\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"providedBetID\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"betCount\",\"type\":\"uint256\"}],\"name\":\"InvalidBetID\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"reason\",\"type\":\"string\"}],\"name\":\"InvalidRequest\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"userB\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"openingPrice\",\"type\":\"uint256\"}],\"name\":\"BetActive\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"closingPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"winnerReward\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"feeAmount\",\"type\":\"uint256\"}],\"name\":\"BetClosed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isLong\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"createTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"closingTime\",\"type\":\"uint256\"}],\"name\":\"BetCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"betId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BetRefunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"betID\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BetRewardWithdrawal\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferRequested\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_isAllowed\",\"type\":\"bool\"}],\"name\":\"allowUser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"betCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"isLong\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"_usdcAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_expireTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_closingTime\",\"type\":\"uint256\"}],\"name\":\"createBet\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getActiveBetIDs\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBTCPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_userAddress\",\"type\":\"address\"}],\"name\":\"getBetIdsForUser\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"}],\"name\":\"getBetInfo\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"userB\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"reward\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isLong\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"createTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expireTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"closingTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"openingPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"closingPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"betStatus\",\"type\":\"uint256\"}],\"internalType\":\"structBetting.BetInfo\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBotAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getBotFeeBasisPoints\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPendingBetIDs\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPriceFeedAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getUSDCAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_usdcAmount\",\"type\":\"uint256\"}],\"name\":\"joinBet\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"}],\"name\":\"refundBet\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"}],\"name\":\"resolveBet\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_botAddress\",\"type\":\"address\"}],\"name\":\"setBotAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_botFeeBasisPoints\",\"type\":\"uint256\"}],\"name\":\"setBotFeeBasisPoints\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_feedAddress\",\"type\":\"address\"}],\"name\":\"setPriceFeedAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_usdcAddress\",\"type\":\"address\"}],\"name\":\"setUSDCAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"userAllowed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_betID\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
 }
 
 // BettingABI is the input ABI used to generate the binding from.
@@ -538,6 +538,37 @@ func (_Betting *BettingCallerSession) Owner() (common.Address, error) {
 	return _Betting.Contract.Owner(&_Betting.CallOpts)
 }
 
+// UserAllowed is a free data retrieval call binding the contract method 0xac38709a.
+//
+// Solidity: function userAllowed(address ) view returns(bool)
+func (_Betting *BettingCaller) UserAllowed(opts *bind.CallOpts, arg0 common.Address) (bool, error) {
+	var out []interface{}
+	err := _Betting.contract.Call(opts, &out, "userAllowed", arg0)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// UserAllowed is a free data retrieval call binding the contract method 0xac38709a.
+//
+// Solidity: function userAllowed(address ) view returns(bool)
+func (_Betting *BettingSession) UserAllowed(arg0 common.Address) (bool, error) {
+	return _Betting.Contract.UserAllowed(&_Betting.CallOpts, arg0)
+}
+
+// UserAllowed is a free data retrieval call binding the contract method 0xac38709a.
+//
+// Solidity: function userAllowed(address ) view returns(bool)
+func (_Betting *BettingCallerSession) UserAllowed(arg0 common.Address) (bool, error) {
+	return _Betting.Contract.UserAllowed(&_Betting.CallOpts, arg0)
+}
+
 // AcceptOwnership is a paid mutator transaction binding the contract method 0x79ba5097.
 //
 // Solidity: function acceptOwnership() returns()
@@ -624,23 +655,23 @@ func (_Betting *BettingTransactorSession) JoinBet(_betID *big.Int, _usdcAmount *
 
 // RefundBet is a paid mutator transaction binding the contract method 0xe1fdb4b4.
 //
-// Solidity: function refundBet(uint256 betId) returns()
-func (_Betting *BettingTransactor) RefundBet(opts *bind.TransactOpts, betId *big.Int) (*types.Transaction, error) {
-	return _Betting.contract.Transact(opts, "refundBet", betId)
+// Solidity: function refundBet(uint256 _betID) returns()
+func (_Betting *BettingTransactor) RefundBet(opts *bind.TransactOpts, _betID *big.Int) (*types.Transaction, error) {
+	return _Betting.contract.Transact(opts, "refundBet", _betID)
 }
 
 // RefundBet is a paid mutator transaction binding the contract method 0xe1fdb4b4.
 //
-// Solidity: function refundBet(uint256 betId) returns()
-func (_Betting *BettingSession) RefundBet(betId *big.Int) (*types.Transaction, error) {
-	return _Betting.Contract.RefundBet(&_Betting.TransactOpts, betId)
+// Solidity: function refundBet(uint256 _betID) returns()
+func (_Betting *BettingSession) RefundBet(_betID *big.Int) (*types.Transaction, error) {
+	return _Betting.Contract.RefundBet(&_Betting.TransactOpts, _betID)
 }
 
 // RefundBet is a paid mutator transaction binding the contract method 0xe1fdb4b4.
 //
-// Solidity: function refundBet(uint256 betId) returns()
-func (_Betting *BettingTransactorSession) RefundBet(betId *big.Int) (*types.Transaction, error) {
-	return _Betting.Contract.RefundBet(&_Betting.TransactOpts, betId)
+// Solidity: function refundBet(uint256 _betID) returns()
+func (_Betting *BettingTransactorSession) RefundBet(_betID *big.Int) (*types.Transaction, error) {
+	return _Betting.Contract.RefundBet(&_Betting.TransactOpts, _betID)
 }
 
 // ResolveBet is a paid mutator transaction binding the contract method 0x4c36c36e.
@@ -811,9 +842,9 @@ func (_Betting *BettingTransactorSession) Receive() (*types.Transaction, error) 
 	return _Betting.Contract.Receive(&_Betting.TransactOpts)
 }
 
-// BettingBetActivedIterator is returned from FilterBetActived and is used to iterate over the raw logs and unpacked data for BetActived events raised by the Betting contract.
-type BettingBetActivedIterator struct {
-	Event *BettingBetActived // Event containing the contract specifics and raw log
+// BettingBetActiveIterator is returned from FilterBetActive and is used to iterate over the raw logs and unpacked data for BetActive events raised by the Betting contract.
+type BettingBetActiveIterator struct {
+	Event *BettingBetActive // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -827,7 +858,7 @@ type BettingBetActivedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *BettingBetActivedIterator) Next() bool {
+func (it *BettingBetActiveIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -836,7 +867,7 @@ func (it *BettingBetActivedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(BettingBetActived)
+			it.Event = new(BettingBetActive)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -851,7 +882,7 @@ func (it *BettingBetActivedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(BettingBetActived)
+		it.Event = new(BettingBetActive)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -867,53 +898,53 @@ func (it *BettingBetActivedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *BettingBetActivedIterator) Error() error {
+func (it *BettingBetActiveIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *BettingBetActivedIterator) Close() error {
+func (it *BettingBetActiveIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// BettingBetActived represents a BetActived event raised by the Betting contract.
-type BettingBetActived struct {
+// BettingBetActive represents a BetActive event raised by the Betting contract.
+type BettingBetActive struct {
 	BetID        *big.Int
 	UserB        common.Address
 	OpeningPrice *big.Int
 	Raw          types.Log // Blockchain specific contextual infos
 }
 
-// FilterBetActived is a free log retrieval operation binding the contract event 0xd2540f7cf9cb3b638f442bcc1539e48c391249f4363c13006702f95356798ff8.
+// FilterBetActive is a free log retrieval operation binding the contract event 0x22f0503c899b3c4c9e260acf22e26e7dbebf20faffc5af5c251b8179e0dccfa0.
 //
-// Solidity: event BetActived(uint256 betID, address indexed userB, uint256 openingPrice)
-func (_Betting *BettingFilterer) FilterBetActived(opts *bind.FilterOpts, userB []common.Address) (*BettingBetActivedIterator, error) {
+// Solidity: event BetActive(uint256 betID, address indexed userB, uint256 openingPrice)
+func (_Betting *BettingFilterer) FilterBetActive(opts *bind.FilterOpts, userB []common.Address) (*BettingBetActiveIterator, error) {
 
 	var userBRule []interface{}
 	for _, userBItem := range userB {
 		userBRule = append(userBRule, userBItem)
 	}
 
-	logs, sub, err := _Betting.contract.FilterLogs(opts, "BetActived", userBRule)
+	logs, sub, err := _Betting.contract.FilterLogs(opts, "BetActive", userBRule)
 	if err != nil {
 		return nil, err
 	}
-	return &BettingBetActivedIterator{contract: _Betting.contract, event: "BetActived", logs: logs, sub: sub}, nil
+	return &BettingBetActiveIterator{contract: _Betting.contract, event: "BetActive", logs: logs, sub: sub}, nil
 }
 
-// WatchBetActived is a free log subscription operation binding the contract event 0xd2540f7cf9cb3b638f442bcc1539e48c391249f4363c13006702f95356798ff8.
+// WatchBetActive is a free log subscription operation binding the contract event 0x22f0503c899b3c4c9e260acf22e26e7dbebf20faffc5af5c251b8179e0dccfa0.
 //
-// Solidity: event BetActived(uint256 betID, address indexed userB, uint256 openingPrice)
-func (_Betting *BettingFilterer) WatchBetActived(opts *bind.WatchOpts, sink chan<- *BettingBetActived, userB []common.Address) (event.Subscription, error) {
+// Solidity: event BetActive(uint256 betID, address indexed userB, uint256 openingPrice)
+func (_Betting *BettingFilterer) WatchBetActive(opts *bind.WatchOpts, sink chan<- *BettingBetActive, userB []common.Address) (event.Subscription, error) {
 
 	var userBRule []interface{}
 	for _, userBItem := range userB {
 		userBRule = append(userBRule, userBItem)
 	}
 
-	logs, sub, err := _Betting.contract.WatchLogs(opts, "BetActived", userBRule)
+	logs, sub, err := _Betting.contract.WatchLogs(opts, "BetActive", userBRule)
 	if err != nil {
 		return nil, err
 	}
@@ -923,8 +954,8 @@ func (_Betting *BettingFilterer) WatchBetActived(opts *bind.WatchOpts, sink chan
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(BettingBetActived)
-				if err := _Betting.contract.UnpackLog(event, "BetActived", log); err != nil {
+				event := new(BettingBetActive)
+				if err := _Betting.contract.UnpackLog(event, "BetActive", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -945,12 +976,12 @@ func (_Betting *BettingFilterer) WatchBetActived(opts *bind.WatchOpts, sink chan
 	}), nil
 }
 
-// ParseBetActived is a log parse operation binding the contract event 0xd2540f7cf9cb3b638f442bcc1539e48c391249f4363c13006702f95356798ff8.
+// ParseBetActive is a log parse operation binding the contract event 0x22f0503c899b3c4c9e260acf22e26e7dbebf20faffc5af5c251b8179e0dccfa0.
 //
-// Solidity: event BetActived(uint256 betID, address indexed userB, uint256 openingPrice)
-func (_Betting *BettingFilterer) ParseBetActived(log types.Log) (*BettingBetActived, error) {
-	event := new(BettingBetActived)
-	if err := _Betting.contract.UnpackLog(event, "BetActived", log); err != nil {
+// Solidity: event BetActive(uint256 betID, address indexed userB, uint256 openingPrice)
+func (_Betting *BettingFilterer) ParseBetActive(log types.Log) (*BettingBetActive, error) {
+	event := new(BettingBetActive)
+	if err := _Betting.contract.UnpackLog(event, "BetActive", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -1105,6 +1136,156 @@ func (_Betting *BettingFilterer) ParseBetClosed(log types.Log) (*BettingBetClose
 	return event, nil
 }
 
+// BettingBetCreatedIterator is returned from FilterBetCreated and is used to iterate over the raw logs and unpacked data for BetCreated events raised by the Betting contract.
+type BettingBetCreatedIterator struct {
+	Event *BettingBetCreated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BettingBetCreatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BettingBetCreated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BettingBetCreated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BettingBetCreatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BettingBetCreatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BettingBetCreated represents a BetCreated event raised by the Betting contract.
+type BettingBetCreated struct {
+	BetID       *big.Int
+	UserA       common.Address
+	Amount      *big.Int
+	IsLong      bool
+	CreateTime  *big.Int
+	ExpireTime  *big.Int
+	ClosingTime *big.Int
+	Raw         types.Log // Blockchain specific contextual infos
+}
+
+// FilterBetCreated is a free log retrieval operation binding the contract event 0xde05455b767113c6c2223a5acb7e608c2a7209bed752b093a2d7536ee3f3e00c.
+//
+// Solidity: event BetCreated(uint256 betID, address indexed userA, uint256 amount, bool isLong, uint256 createTime, uint256 expireTime, uint256 closingTime)
+func (_Betting *BettingFilterer) FilterBetCreated(opts *bind.FilterOpts, userA []common.Address) (*BettingBetCreatedIterator, error) {
+
+	var userARule []interface{}
+	for _, userAItem := range userA {
+		userARule = append(userARule, userAItem)
+	}
+
+	logs, sub, err := _Betting.contract.FilterLogs(opts, "BetCreated", userARule)
+	if err != nil {
+		return nil, err
+	}
+	return &BettingBetCreatedIterator{contract: _Betting.contract, event: "BetCreated", logs: logs, sub: sub}, nil
+}
+
+// WatchBetCreated is a free log subscription operation binding the contract event 0xde05455b767113c6c2223a5acb7e608c2a7209bed752b093a2d7536ee3f3e00c.
+//
+// Solidity: event BetCreated(uint256 betID, address indexed userA, uint256 amount, bool isLong, uint256 createTime, uint256 expireTime, uint256 closingTime)
+func (_Betting *BettingFilterer) WatchBetCreated(opts *bind.WatchOpts, sink chan<- *BettingBetCreated, userA []common.Address) (event.Subscription, error) {
+
+	var userARule []interface{}
+	for _, userAItem := range userA {
+		userARule = append(userARule, userAItem)
+	}
+
+	logs, sub, err := _Betting.contract.WatchLogs(opts, "BetCreated", userARule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BettingBetCreated)
+				if err := _Betting.contract.UnpackLog(event, "BetCreated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseBetCreated is a log parse operation binding the contract event 0xde05455b767113c6c2223a5acb7e608c2a7209bed752b093a2d7536ee3f3e00c.
+//
+// Solidity: event BetCreated(uint256 betID, address indexed userA, uint256 amount, bool isLong, uint256 createTime, uint256 expireTime, uint256 closingTime)
+func (_Betting *BettingFilterer) ParseBetCreated(log types.Log) (*BettingBetCreated, error) {
+	event := new(BettingBetCreated)
+	if err := _Betting.contract.UnpackLog(event, "BetCreated", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // BettingBetRefundedIterator is returned from FilterBetRefunded and is used to iterate over the raw logs and unpacked data for BetRefunded events raised by the Betting contract.
 type BettingBetRefundedIterator struct {
 	Event *BettingBetRefunded // Event containing the contract specifics and raw log
@@ -1251,9 +1432,9 @@ func (_Betting *BettingFilterer) ParseBetRefunded(log types.Log) (*BettingBetRef
 	return event, nil
 }
 
-// BettingNewBetCreatedIterator is returned from FilterNewBetCreated and is used to iterate over the raw logs and unpacked data for NewBetCreated events raised by the Betting contract.
-type BettingNewBetCreatedIterator struct {
-	Event *BettingNewBetCreated // Event containing the contract specifics and raw log
+// BettingBetRewardWithdrawalIterator is returned from FilterBetRewardWithdrawal and is used to iterate over the raw logs and unpacked data for BetRewardWithdrawal events raised by the Betting contract.
+type BettingBetRewardWithdrawalIterator struct {
+	Event *BettingBetRewardWithdrawal // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -1267,7 +1448,7 @@ type BettingNewBetCreatedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *BettingNewBetCreatedIterator) Next() bool {
+func (it *BettingBetRewardWithdrawalIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -1276,7 +1457,7 @@ func (it *BettingNewBetCreatedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(BettingNewBetCreated)
+			it.Event = new(BettingBetRewardWithdrawal)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -1291,7 +1472,7 @@ func (it *BettingNewBetCreatedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(BettingNewBetCreated)
+		it.Event = new(BettingBetRewardWithdrawal)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -1307,57 +1488,53 @@ func (it *BettingNewBetCreatedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *BettingNewBetCreatedIterator) Error() error {
+func (it *BettingBetRewardWithdrawalIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *BettingNewBetCreatedIterator) Close() error {
+func (it *BettingBetRewardWithdrawalIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// BettingNewBetCreated represents a NewBetCreated event raised by the Betting contract.
-type BettingNewBetCreated struct {
-	BetID       *big.Int
-	UserA       common.Address
-	Amount      *big.Int
-	IsLong      bool
-	CreateTime  *big.Int
-	ExpireTime  *big.Int
-	ClosingTime *big.Int
-	Raw         types.Log // Blockchain specific contextual infos
+// BettingBetRewardWithdrawal represents a BetRewardWithdrawal event raised by the Betting contract.
+type BettingBetRewardWithdrawal struct {
+	BetID  *big.Int
+	Winner common.Address
+	Amount *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
 }
 
-// FilterNewBetCreated is a free log retrieval operation binding the contract event 0xf74d83efdd7275db73dde45ff15fed93e1eb2ecd96c7f9bbb109fb73876ebb0c.
+// FilterBetRewardWithdrawal is a free log retrieval operation binding the contract event 0xefdb48e70ce71525311f25a41457d5e11383ec4a01dffde237d8315fbb9a21e6.
 //
-// Solidity: event NewBetCreated(uint256 betID, address indexed userA, uint256 amount, bool isLong, uint256 createTime, uint256 expireTime, uint256 closingTime)
-func (_Betting *BettingFilterer) FilterNewBetCreated(opts *bind.FilterOpts, userA []common.Address) (*BettingNewBetCreatedIterator, error) {
+// Solidity: event BetRewardWithdrawal(uint256 betID, address indexed winner, uint256 amount)
+func (_Betting *BettingFilterer) FilterBetRewardWithdrawal(opts *bind.FilterOpts, winner []common.Address) (*BettingBetRewardWithdrawalIterator, error) {
 
-	var userARule []interface{}
-	for _, userAItem := range userA {
-		userARule = append(userARule, userAItem)
+	var winnerRule []interface{}
+	for _, winnerItem := range winner {
+		winnerRule = append(winnerRule, winnerItem)
 	}
 
-	logs, sub, err := _Betting.contract.FilterLogs(opts, "NewBetCreated", userARule)
+	logs, sub, err := _Betting.contract.FilterLogs(opts, "BetRewardWithdrawal", winnerRule)
 	if err != nil {
 		return nil, err
 	}
-	return &BettingNewBetCreatedIterator{contract: _Betting.contract, event: "NewBetCreated", logs: logs, sub: sub}, nil
+	return &BettingBetRewardWithdrawalIterator{contract: _Betting.contract, event: "BetRewardWithdrawal", logs: logs, sub: sub}, nil
 }
 
-// WatchNewBetCreated is a free log subscription operation binding the contract event 0xf74d83efdd7275db73dde45ff15fed93e1eb2ecd96c7f9bbb109fb73876ebb0c.
+// WatchBetRewardWithdrawal is a free log subscription operation binding the contract event 0xefdb48e70ce71525311f25a41457d5e11383ec4a01dffde237d8315fbb9a21e6.
 //
-// Solidity: event NewBetCreated(uint256 betID, address indexed userA, uint256 amount, bool isLong, uint256 createTime, uint256 expireTime, uint256 closingTime)
-func (_Betting *BettingFilterer) WatchNewBetCreated(opts *bind.WatchOpts, sink chan<- *BettingNewBetCreated, userA []common.Address) (event.Subscription, error) {
+// Solidity: event BetRewardWithdrawal(uint256 betID, address indexed winner, uint256 amount)
+func (_Betting *BettingFilterer) WatchBetRewardWithdrawal(opts *bind.WatchOpts, sink chan<- *BettingBetRewardWithdrawal, winner []common.Address) (event.Subscription, error) {
 
-	var userARule []interface{}
-	for _, userAItem := range userA {
-		userARule = append(userARule, userAItem)
+	var winnerRule []interface{}
+	for _, winnerItem := range winner {
+		winnerRule = append(winnerRule, winnerItem)
 	}
 
-	logs, sub, err := _Betting.contract.WatchLogs(opts, "NewBetCreated", userARule)
+	logs, sub, err := _Betting.contract.WatchLogs(opts, "BetRewardWithdrawal", winnerRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1367,8 +1544,8 @@ func (_Betting *BettingFilterer) WatchNewBetCreated(opts *bind.WatchOpts, sink c
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(BettingNewBetCreated)
-				if err := _Betting.contract.UnpackLog(event, "NewBetCreated", log); err != nil {
+				event := new(BettingBetRewardWithdrawal)
+				if err := _Betting.contract.UnpackLog(event, "BetRewardWithdrawal", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -1389,12 +1566,12 @@ func (_Betting *BettingFilterer) WatchNewBetCreated(opts *bind.WatchOpts, sink c
 	}), nil
 }
 
-// ParseNewBetCreated is a log parse operation binding the contract event 0xf74d83efdd7275db73dde45ff15fed93e1eb2ecd96c7f9bbb109fb73876ebb0c.
+// ParseBetRewardWithdrawal is a log parse operation binding the contract event 0xefdb48e70ce71525311f25a41457d5e11383ec4a01dffde237d8315fbb9a21e6.
 //
-// Solidity: event NewBetCreated(uint256 betID, address indexed userA, uint256 amount, bool isLong, uint256 createTime, uint256 expireTime, uint256 closingTime)
-func (_Betting *BettingFilterer) ParseNewBetCreated(log types.Log) (*BettingNewBetCreated, error) {
-	event := new(BettingNewBetCreated)
-	if err := _Betting.contract.UnpackLog(event, "NewBetCreated", log); err != nil {
+// Solidity: event BetRewardWithdrawal(uint256 betID, address indexed winner, uint256 amount)
+func (_Betting *BettingFilterer) ParseBetRewardWithdrawal(log types.Log) (*BettingBetRewardWithdrawal, error) {
+	event := new(BettingBetRewardWithdrawal)
+	if err := _Betting.contract.UnpackLog(event, "BetRewardWithdrawal", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -1701,152 +1878,6 @@ func (_Betting *BettingFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts,
 func (_Betting *BettingFilterer) ParseOwnershipTransferred(log types.Log) (*BettingOwnershipTransferred, error) {
 	event := new(BettingOwnershipTransferred)
 	if err := _Betting.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
-		return nil, err
-	}
-	event.Raw = log
-	return event, nil
-}
-
-// BettingRewardWithdrawalIterator is returned from FilterRewardWithdrawal and is used to iterate over the raw logs and unpacked data for RewardWithdrawal events raised by the Betting contract.
-type BettingRewardWithdrawalIterator struct {
-	Event *BettingRewardWithdrawal // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BettingRewardWithdrawalIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BettingRewardWithdrawal)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BettingRewardWithdrawal)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BettingRewardWithdrawalIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BettingRewardWithdrawalIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BettingRewardWithdrawal represents a RewardWithdrawal event raised by the Betting contract.
-type BettingRewardWithdrawal struct {
-	BetID  *big.Int
-	Winner common.Address
-	Amount *big.Int
-	Raw    types.Log // Blockchain specific contextual infos
-}
-
-// FilterRewardWithdrawal is a free log retrieval operation binding the contract event 0xc5125b27e7e5dd75644ec565391448b5229c80f3b00d5f3b032fe7b263e7c031.
-//
-// Solidity: event RewardWithdrawal(uint256 betID, address indexed winner, uint256 amount)
-func (_Betting *BettingFilterer) FilterRewardWithdrawal(opts *bind.FilterOpts, winner []common.Address) (*BettingRewardWithdrawalIterator, error) {
-
-	var winnerRule []interface{}
-	for _, winnerItem := range winner {
-		winnerRule = append(winnerRule, winnerItem)
-	}
-
-	logs, sub, err := _Betting.contract.FilterLogs(opts, "RewardWithdrawal", winnerRule)
-	if err != nil {
-		return nil, err
-	}
-	return &BettingRewardWithdrawalIterator{contract: _Betting.contract, event: "RewardWithdrawal", logs: logs, sub: sub}, nil
-}
-
-// WatchRewardWithdrawal is a free log subscription operation binding the contract event 0xc5125b27e7e5dd75644ec565391448b5229c80f3b00d5f3b032fe7b263e7c031.
-//
-// Solidity: event RewardWithdrawal(uint256 betID, address indexed winner, uint256 amount)
-func (_Betting *BettingFilterer) WatchRewardWithdrawal(opts *bind.WatchOpts, sink chan<- *BettingRewardWithdrawal, winner []common.Address) (event.Subscription, error) {
-
-	var winnerRule []interface{}
-	for _, winnerItem := range winner {
-		winnerRule = append(winnerRule, winnerItem)
-	}
-
-	logs, sub, err := _Betting.contract.WatchLogs(opts, "RewardWithdrawal", winnerRule)
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BettingRewardWithdrawal)
-				if err := _Betting.contract.UnpackLog(event, "RewardWithdrawal", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseRewardWithdrawal is a log parse operation binding the contract event 0xc5125b27e7e5dd75644ec565391448b5229c80f3b00d5f3b032fe7b263e7c031.
-//
-// Solidity: event RewardWithdrawal(uint256 betID, address indexed winner, uint256 amount)
-func (_Betting *BettingFilterer) ParseRewardWithdrawal(log types.Log) (*BettingRewardWithdrawal, error) {
-	event := new(BettingRewardWithdrawal)
-	if err := _Betting.contract.UnpackLog(event, "RewardWithdrawal", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

@@ -55,8 +55,9 @@ func main() {
 	// init APIs and start server
 	r := gin.Default()
 	api.InitAPIs(db, r)
-	err := r.Run(":8080")
+	err := r.Run(os.Getenv("HTTP_PORT")) // Run on port 8080
 	if err != nil {
+		log.Fatalf("Failed to start server: %v", err)
 		return
-	} // Run on port 8080
+	}
 }

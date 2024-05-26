@@ -9,27 +9,26 @@ import (
 )
 
 type Event struct {
-	ID          uint `gorm:"primary_key"`
-	TxHash      string
-	BlockNumber uint64
-	BlockHash   string
-	From        string
-	InputData   []byte
-	BetID       uint64
-	EventType   string
-	User        string
-	Timestamp   time.Time `gorm:"default:CURRENT_TIMESTAMP"`
+	ID              uint `gorm:"primary_key"`
+	TxHash          string
+	BlockNumber     uint64
+	BlockHash       string
+	InputData       []byte
+	BetID           uint64
+	EventType       string
+	ContractAddress string
+	Timestamp       time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 }
 
 func InsertEvent(betID uint64, eventName string, db *gorm.DB, raw types.Log) {
 	db.Create(
 		&Event{TxHash: raw.TxHash.Hex(),
-			BlockNumber: raw.BlockNumber,
-			BlockHash:   raw.BlockHash.Hex(),
-			User:        raw.Address.Hex(),
-			InputData:   raw.Data,
-			BetID:       betID,
-			EventType:   eventName})
+			BlockNumber:     raw.BlockNumber,
+			BlockHash:       raw.BlockHash.Hex(),
+			ContractAddress: raw.Address.Hex(),
+			InputData:       raw.Data,
+			BetID:           betID,
+			EventType:       eventName})
 }
 
 // GetEvents Get all events

@@ -28,7 +28,7 @@ type Bet struct {
 	BetStatus    int
 }
 
-func InsertBet(db *gorm.DB, e *betting.BettingNewBetCreated) {
+func InsertBet(db *gorm.DB, e *betting.BettingBetCreated) {
 	db.Create(
 		&Bet{
 			BetID:       e.BetID.Uint64(),
@@ -45,7 +45,7 @@ func PostBet(db *gorm.DB, bet Bet) {
 	db.Create(&bet)
 }
 
-func UpdateToActive(db *gorm.DB, e *betting.BettingBetActived) {
+func UpdateToActive(db *gorm.DB, e *betting.BettingBetActive) {
 	db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
 		Updates(Bet{UserB: e.UserB.Hex(), OpeningPrice: floatFromBigInt(e.OpeningPrice), BetStatus: 1}) // Update bet status to active
 }
@@ -53,7 +53,11 @@ func UpdateToActive(db *gorm.DB, e *betting.BettingBetActived) {
 func UpdateToClosed(db *gorm.DB, e *betting.BettingBetClosed) {
 	db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
 		Updates(Bet{Winner: e.Winner.Hex(), Reward: floatFromBigInt(e.WinnerReward), ClosingPrice: floatFromBigInt(e.ClosingPrice), BetStatus: 2})
+}
 
+func UpdateToWithdraw(db *gorm.DB, e *betting.BettingBetRewardWithdrawal) {
+	db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
+		Updates(Bet{BetStatus: 3})
 }
 
 // UpdateBetByID updates an existing bet in the database by ID

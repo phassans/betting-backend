@@ -50,25 +50,25 @@ func ReadEvents(db *gorm.DB) {
 func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
 	//eventName := contractABI.Events[vLog.Topics[0].Hex()].Name
 	switch vLog.Topics[0].Hex() {
-	case common.HexToHash(os.Getenv("TOPIC_NEW_BET_CREATED")).Hex(): // NewBetCreated event hash
-		e, err := contract.ParseNewBetCreated(vLog)
+	case common.HexToHash(os.Getenv("TOPIC_BET_CREATED")).Hex(): // NewBetCreated event hash
+		e, err := contract.ParseBetCreated(vLog)
 		if err != nil {
 			log.Printf("Failed to parse NewBetCreated event: %v", err)
 			return
 		}
 
 		model.InsertBet(db, e)
-		model.InsertEvent(e.BetID.Uint64(), "NewBetCreated", db, e.Raw)
+		model.InsertEvent(e.BetID.Uint64(), "BetCreated", db, e.Raw)
 
-	case common.HexToHash(os.Getenv("TOPIC_BET_ACTIVED")).Hex(): // BetActived event hash
-		e, err := contract.ParseBetActived(vLog)
+	case common.HexToHash(os.Getenv("TOPIC_BET_ACTIVE")).Hex(): // BetActived event hash
+		e, err := contract.ParseBetActive(vLog)
 		if err != nil {
 			log.Printf("Failed to parse BetActived event: %v", err)
 			return
 		}
 
 		model.UpdateToActive(db, e) // Update bet status to active
-		model.InsertEvent(e.BetID.Uint64(), "BetActived", db, e.Raw)
+		model.InsertEvent(e.BetID.Uint64(), "BetActive", db, e.Raw)
 
 	case common.HexToHash(os.Getenv("TOPIC_BET_CLOSED")).Hex(): // BetClosed event hash
 		e, err := contract.ParseBetClosed(vLog)
@@ -80,14 +80,15 @@ func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
 		model.UpdateToClosed(db, e)
 		model.InsertEvent(e.BetID.Uint64(), "BetClosed", db, e.Raw)
 
-	case common.HexToHash(os.Getenv("TOPIC_REWARD_WITHDRAWAL")).Hex(): // RewardWithdrawal event hash
-		e, err := contract.ParseRewardWithdrawal(vLog)
+	case common.HexToHash(os.Getenv("TOPIC_BET_REWARD_WITHDRAWAL")).Hex(): // RewardWithdrawal event hash
+		e, err := contract.ParseBetRewardWithdrawal(vLog)
 		if err != nil {
 			log.Printf("Failed to parse RewardWithdrawal event: %v", err)
 			return
 		}
 
-		model.InsertEvent(e.BetID.Uint64(), "RewardWithdrawal", db, e.Raw)
+		model.UpdateToWithdraw(db, e)
+		model.InsertEvent(e.BetID.Uint64(), "BetRewardWithdrawal", db, e.Raw)
 
 	case common.HexToHash(os.Getenv("TOPIC_BET_REFUNDED")).Hex():
 		e, err := contract.ParseBetRefunded(vLog)
