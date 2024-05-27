@@ -32,22 +32,24 @@ func InsertEvent(betID uint64, eventName string, db *gorm.DB, raw types.Log) {
 }
 
 // GetEvents Get all events
-func GetEvents(c *gin.Context, db *gorm.DB) {
+func GetEvents(c *gin.Context, db *gorm.DB) error {
 	var events []Event
 	if err := db.Find(&events).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return err
 	}
+
 	c.JSON(http.StatusOK, events)
+	return nil
 }
 
 // GetEventByID Get event by ID
-func GetEventByID(c *gin.Context, db *gorm.DB) {
+func GetEventByID(c *gin.Context, db *gorm.DB) error {
 	id := c.Param("id")
 	var event Event
 	if err := db.Where("id = ?", id).First(&event).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Event not found"})
-		return
+		return err
 	}
+
 	c.JSON(http.StatusOK, event)
+	return nil
 }

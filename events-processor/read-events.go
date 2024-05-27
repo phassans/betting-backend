@@ -13,42 +13,63 @@ import (
 	"os"
 )
 
-// ReadEvents Read events from Ethereum and store in database
+// ReadEvents reads events from the Ethereum blockchain and stores them in the database.
 func ReadEvents(db *gorm.DB) {
+	rpcURL := os.Getenv("RPC_URL")
+	if rpcURL == "" {
+		log.Fatalf("RPC_URL is not set in environment variables")
+	}
+
+	// Connect to the Ethereum client using the RPC URL from environment variables.
 	client, err := ethclient.Dial(os.Getenv("RPC_URL"))
 	if err != nil {
 		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
 	}
 
-	contractAddress := common.HexToAddress(os.Getenv("BETTING_CONTRACT_ADDRESS"))
+	contractAddressStr := os.Getenv("BETTING_CONTRACT_ADDRESS")
+	if contractAddressStr == "" {
+		log.Fatalf("BETTING_CONTRACT_ADDRESS is not set in environment variables")
+	}
+	// Get the betting contract address from environment variables and instantiate the contract.
+	contractAddress := common.HexToAddress(contractAddressStr)
 	bettingContract, err := betting.NewBetting(contractAddress, client)
 	if err != nil {
 		log.Fatalf("Failed to instantiate a Betting contract: %v", err)
 	}
 
+	// Create a filter query to listen for events from the betting contract address.
 	query := ethereum.FilterQuery{
 		Addresses: []common.Address{contractAddress},
 	}
 
+	// Create a channel to receive logs and subscribe to logs based on the filter query.
 	logs := make(chan types.Log)
 	sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
 	if err != nil {
 		log.Fatalf("Failed to subscribe to logs: %v", err)
 	}
 
+	// Handle graceful shutdown
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// Listen for logs and handle them appropriately.
 	for {
 		select {
 		case err := <-sub.Err():
 			log.Fatalf("Error: %v", err)
 		case vLog := <-logs:
 			handleLog(db, bettingContract, vLog)
+		case <-ctx.Done():
+			log.Println("Shutting down event processor...")
+			return
 		}
 	}
 }
 
-// Handle logs and store in database
+// handleLog processes the received log and stores the event in the database.
 func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
-	//eventName := contractABI.Events[vLog.Topics[0].Hex()].Name
+	// 	Switch based on the event topic hash to identify the event type.
 	switch vLog.Topics[0].Hex() {
 	case common.HexToHash(os.Getenv("TOPIC_BET_CREATED")).Hex(): // NewBetCreated event hash
 		e, err := contract.ParseBetCreated(vLog)
@@ -57,6 +78,7 @@ func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
 			return
 		}
 
+		// Insert the new bet and event into the database.
 		model.InsertBet(db, e)
 		model.InsertEvent(e.BetID.Uint64(), "BetCreated", db, e.Raw)
 
@@ -67,7 +89,8 @@ func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
 			return
 		}
 
-		model.UpdateToActive(db, e) // Update bet status to active
+		// Update the bet status to active and insert the event into the database.
+		model.UpdateToActive(db, e)
 		model.InsertEvent(e.BetID.Uint64(), "BetActive", db, e.Raw)
 
 	case common.HexToHash(os.Getenv("TOPIC_BET_CLOSED")).Hex(): // BetClosed event hash
@@ -77,6 +100,7 @@ func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
 			return
 		}
 
+		// Update the bet status to closed and insert the event into the database.
 		model.UpdateToClosed(db, e)
 		model.InsertEvent(e.BetID.Uint64(), "BetClosed", db, e.Raw)
 
@@ -87,6 +111,7 @@ func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
 			return
 		}
 
+		// Update the bet status to withdraw and insert the event into the database.
 		model.UpdateToWithdraw(db, e)
 		model.InsertEvent(e.BetID.Uint64(), "BetRewardWithdrawal", db, e.Raw)
 
@@ -96,6 +121,11 @@ func handleLog(db *gorm.DB, contract *betting.Betting, vLog types.Log) {
 			log.Printf("Failed to parse BetRefunded event: %v", err)
 			return
 		}
+
+		// insert the event into the database.
 		model.InsertEvent(e.BetId.Uint64(), "BetRefunded", db, e.Raw)
+
+	default:
+		log.Printf("Unhandled event topic: %v", vLog.Topics[0].Hex())
 	}
 }

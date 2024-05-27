@@ -29,35 +29,44 @@ func initDB() *gorm.DB {
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbSSLMode := os.Getenv("DB_SSLMODE")
 
+	if dbHost == "" || dbPort == "" || dbUser == "" || dbName == "" || dbPassword == "" || dbSSLMode == "" {
+		log.Fatalf("Database environment variables are not set properly")
+	}
+
 	// Create the connection string
 	dsn := "host=" + dbHost + " port=" + dbPort + " user=" + dbUser + " dbname=" + dbName + " password=" + dbPassword + " sslmode=" + dbSSLMode
 
-	// Connect to the database
+	// Connect to the PostgreSQL database
 	db, err := gorm.Open("postgres", dsn)
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
 
-	// Auto-migrate the schema
+	// Auto-migrate the schema (create or update tables based on the model definitions)
 	db.AutoMigrate(&model.Bet{}, &model.Event{})
 
 	return db
 }
 
 func main() {
-	// init DB
+	// Initialize the database
 	db := initDB()
 	defer db.Close()
 
-	// start events processor
+	// Start the events processor in a separate goroutine
 	go events_processor.ReadEvents(db) // Start reading events in a separate goroutine
 
-	// init APIs and start server
+	// Start the Gin server on the specified port
 	r := gin.Default()
 	api.InitAPIs(db, r)
-	err := r.Run(os.Getenv("HTTP_PORT")) // Run on port 8080
-	if err != nil {
+
+	// Start the Gin server on the specified port
+	port := os.Getenv("HTTP_PORT")
+	if port == "" {
+		port = "8080" // Default to port 8080 if not set
+	}
+
+	if err := r.Run(":" + port); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
-		return
 	}
 }

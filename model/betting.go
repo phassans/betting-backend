@@ -6,6 +6,7 @@ import (
 	_ "github.com/ethereum/go-ethereum/core/types"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	"log"
 	"math/big"
 	"net/http"
 	"time"
@@ -28,36 +29,61 @@ type Bet struct {
 	BetStatus    int
 }
 
-func InsertBet(db *gorm.DB, e *betting.BettingBetCreated) {
-	db.Create(
-		&Bet{
-			BetID:       e.BetID.Uint64(),
-			UserA:       e.UserA.Hex(),
-			Amount:      floatFromBigInt(e.Amount),
-			IsLong:      e.IsLong,
-			CreateTime:  time.Unix(e.CreateTime.Int64(), 0),
-			ExpireTime:  time.Unix(e.ExpireTime.Int64(), 0),
-			ClosingTime: time.Unix(e.ClosingTime.Int64(), 0),
-		})
+// InsertBet inserts a new bet record into the database
+func InsertBet(db *gorm.DB, e *betting.BettingBetCreated) error {
+	bet := Bet{
+		BetID:       e.BetID.Uint64(),
+		UserA:       e.UserA.Hex(),
+		Amount:      floatFromBigInt(e.Amount),
+		IsLong:      e.IsLong,
+		CreateTime:  time.Unix(e.CreateTime.Int64(), 0),
+		ExpireTime:  time.Unix(e.ExpireTime.Int64(), 0),
+		ClosingTime: time.Unix(e.ClosingTime.Int64(), 0),
+	}
+	if err := db.Create(&bet).Error; err != nil {
+		log.Printf("Error inserting bet: %v", err)
+		return err
+	}
+
+	return nil
 }
 
-func PostBet(db *gorm.DB, bet Bet) {
-	db.Create(&bet)
+// PostBet creates a new bet record in the database
+func PostBet(db *gorm.DB, bet Bet) error {
+	return db.Create(&bet).Error
 }
 
-func UpdateToActive(db *gorm.DB, e *betting.BettingBetActive) {
-	db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
-		Updates(Bet{UserB: e.UserB.Hex(), OpeningPrice: floatFromBigInt(e.OpeningPrice), BetStatus: 1}) // Update bet status to active
+// UpdateToActive updates a bet's status to active
+func UpdateToActive(db *gorm.DB, e *betting.BettingBetActive) error {
+	if err := db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
+		Updates(Bet{UserB: e.UserB.Hex(), OpeningPrice: floatFromBigInt(e.OpeningPrice), BetStatus: 1}).Error; err != nil {
+		log.Printf("Error updating bet to active: %v", err)
+		return err
+	}
+
+	return nil
 }
 
-func UpdateToClosed(db *gorm.DB, e *betting.BettingBetClosed) {
-	db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
-		Updates(Bet{Winner: e.Winner.Hex(), Reward: floatFromBigInt(e.WinnerReward), ClosingPrice: floatFromBigInt(e.ClosingPrice), BetStatus: 2})
+// UpdateToClosed updates a bet's status to closed
+func UpdateToClosed(db *gorm.DB, e *betting.BettingBetClosed) error {
+	if err := db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
+		Updates(Bet{Winner: e.Winner.Hex(), Reward: floatFromBigInt(e.WinnerReward), ClosingPrice: floatFromBigInt(e.ClosingPrice), BetStatus: 2}).Error; err != nil {
+		log.Printf("Error updating bet to closed: %v", err)
+		return err
+	}
+
+	return nil
 }
 
-func UpdateToWithdraw(db *gorm.DB, e *betting.BettingBetRewardWithdrawal) {
-	db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
-		Updates(Bet{BetStatus: 3})
+// UpdateToWithdraw updates a bet's status to withdrawn
+func UpdateToWithdraw(db *gorm.DB, e *betting.BettingBetRewardWithdrawal) error {
+	if err := db.Model(&Bet{}).Where("bet_id = ?", e.BetID.Uint64()).
+		Updates(Bet{BetStatus: 3}).Error; err != nil {
+		log.Printf("Error updating bet to withdrawn: %v", err)
+		return err
+	}
+
+	return nil
 }
 
 // UpdateBetByID updates an existing bet in the database by ID
@@ -86,26 +112,29 @@ func UpdateBetByID(db *gorm.DB, id uint, updatedBet *Bet) error {
 }
 
 // GetBets Get all bets
-func GetBets(c *gin.Context, db *gorm.DB) {
+func GetBets(c *gin.Context, db *gorm.DB) error {
 	var bets []Bet
 	if err := db.Find(&bets).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return err
 	}
+
 	c.JSON(http.StatusOK, bets)
+	return nil
 }
 
-// GetBetByID Get bet by ID
-func GetBetByID(c *gin.Context, db *gorm.DB) {
+// GetBetByID retrieves a bet by ID from the database
+func GetBetByID(c *gin.Context, db *gorm.DB) error {
 	id := c.Param("id")
 	var bet Bet
 	if err := db.Where("bet_id = ?", id).First(&bet).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Bet not found"})
-		return
+		return err
 	}
+
 	c.JSON(http.StatusOK, bet)
+	return nil
 }
 
+// floatFromBigInt converts a big.Int to a float64
 func floatFromBigInt(value *big.Int) float64 {
 	f, _ := new(big.Float).SetInt(value).Float64()
 	return f

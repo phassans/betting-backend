@@ -10,19 +10,42 @@ import (
 
 func InitAPIs(db *gorm.DB, r *gin.Engine) {
 	r.GET("/bets", func(c *gin.Context) {
-		model.GetBets(c, db)
+		if err := model.GetBets(c, db); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
 	})
 
+	// Retrieve a bet by ID
 	r.GET("/bets/:id", func(c *gin.Context) {
-		model.GetBetByID(c, db)
+		if err := model.GetBetByID(c, db); err != nil {
+			if gorm.IsRecordNotFoundError(err) {
+				c.JSON(http.StatusNotFound, gin.H{"error": "Bet not found"})
+			} else {
+				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			}
+			return
+		}
 	})
 
+	// Retrieve all events
 	r.GET("/events", func(c *gin.Context) {
-		model.GetEvents(c, db)
+		if err := model.GetEvents(c, db); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
 	})
 
+	// Retrieve an event by ID
 	r.GET("/events/:id", func(c *gin.Context) {
-		model.GetEventByID(c, db)
+		if err := model.GetEventByID(c, db); err != nil {
+			if gorm.IsRecordNotFoundError(err) {
+				c.JSON(http.StatusNotFound, gin.H{"error": "Event not found"})
+			} else {
+				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			}
+			return
+		}
 	})
 
 	// Create a new bet
@@ -32,7 +55,10 @@ func InitAPIs(db *gorm.DB, r *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		model.PostBet(db, bet)
+		if err := model.PostBet(db, bet); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
 		c.JSON(http.StatusOK, bet)
 	})
 
