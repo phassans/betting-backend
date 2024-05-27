@@ -4,7 +4,9 @@
 
 ### Introduction
 
-This project involves running server APIs, setting up a PostgreSQL database, processing smart contract events, saving these events into a database, and providing APIs about events and bets.
+This project involves running server APIs, setting up a PostgreSQL database, processing smart contract events, saving these events into a database, and providing APIs about events and bets. The project uses GORM as the ORM for interacting with the PostgreSQL database.
+
+
 
 ---
 
@@ -98,11 +100,20 @@ The file `read-events.go` handles the processing of smart contract events. Key s
        log.Fatal(err)
    }
    ```
-
 2. **Listening to Events**
 
-   Utilize the `go-ethereum` package to set up event subscriptions.
+   Define below constants in .env file. Topics should be captured from the events logs.
 
+    ```go
+    RPC_URL=wss://arb-sepolia.g.alchemy.com/
+    BETTING_CONTRACT_ADDRESS=
+    TOPIC_BET_CREATED=
+    TOPIC_BET_ACTIVE=
+    TOPIC_BET_CLOSED=
+    TOPIC_BET_REWARD_WITHDRAWAL=
+    TOPIC_BET_REFUNDED=
+   ```
+   Utilize the `go-ethereum` package to set up event subscriptions.
    ```go
    logs := make(chan types.Log)
    sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
